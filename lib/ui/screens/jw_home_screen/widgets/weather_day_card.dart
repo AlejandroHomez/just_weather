@@ -20,27 +20,7 @@ class WeatherDayCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: isDark ? JwColors.JW_PRIMARY_BLACK : JwColors.JW_PRIMARY_WHITE,
-        boxShadow: [
-          BoxShadow(
-            color: isDark
-                ? JwColors.JW_SCALE_PRIMARY
-                : JwColors.JW_PRIMARY_GREY,
-            offset: Offset(-6, -6),
-            blurRadius: 16,
-          ),
-
-          BoxShadow(
-            color: isDark
-                ? JwColors.JW_PRIMARY_BLACK_600
-                : JwColors.JW_PRIMARY_GREY_600,
-            offset: Offset(6, 6),
-            blurRadius: 16,
-          ),
-        ],
-      ),
+      decoration: JwStyles.extraInfoBoxDecoration(isDark),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

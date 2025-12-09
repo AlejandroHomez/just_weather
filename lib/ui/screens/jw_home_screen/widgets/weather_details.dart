@@ -36,12 +36,12 @@ class WeatherDetails extends StatelessWidget {
                     ExtraInfo(
                       icon: Icons.air,
                       label: "Viento",
-                      value: "${_weatherDate!.current.windKph} km/h",
+                      value: "${_weatherDate.current.windKph} km/h",
                     ),
                     ExtraInfo(
                       icon: Icons.thermostat,
                       label: "Sensación",
-                      value: "${_weatherDate!.current.feelsLikeC}°",
+                      value: "${_weatherDate.current.feelsLikeC}°",
                     ),
                   ],
                 ),
@@ -51,17 +51,17 @@ class WeatherDetails extends StatelessWidget {
                     ExtraInfo(
                       icon: Icons.wb_sunny,
                       label: "Uv",
-                      value: "${_weatherDate!.current.uv}",
+                      value: "${_weatherDate.current.uv}",
                     ),
                     ExtraInfo(
                       icon: Icons.wb_sunny,
                       label: "Visibilidad",
-                      value: "${_weatherDate!.current.visKm.toInt()} Km",
+                      value: "${_weatherDate.current.visKm.toInt()} Km",
                     ),
                     ExtraInfo(
                       icon: Icons.wb_iridescent,
                       label: "Presión",
-                      value: "${_weatherDate!.current.pressureMb.toInt()} hPa",
+                      value: "${_weatherDate.current.pressureMb.toInt()} hPa",
                     ),
                   ],
                 ),

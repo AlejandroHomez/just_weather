@@ -25,7 +25,7 @@ class AstroWidgets extends StatelessWidget {
           spacing: 10,
           children: [
             Image.asset("assets/icons/sunset.png", height: 80),
-            Text(_weatherDate!.astro.sunset ?? ''),
+            Text(_weatherDate.astro.sunset ?? ''),
           ],
         ),
       ],

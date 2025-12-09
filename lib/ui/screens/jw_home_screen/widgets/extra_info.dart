@@ -18,27 +18,7 @@ class ExtraInfo extends StatelessWidget {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: isDark ? JwColors.JW_PRIMARY_BLACK : JwColors.JW_PRIMARY_WHITE,
-        boxShadow: [
-          BoxShadow(
-            color: isDark
-                ? JwColors.JW_SCALE_PRIMARY
-                : JwColors.JW_PRIMARY_GREY,
-            offset: Offset(-6, -6),
-            blurRadius: 16,
-          ),
-
-          BoxShadow(
-            color: isDark
-                ? JwColors.JW_PRIMARY_BLACK_600
-                : JwColors.JW_PRIMARY_GREY_600,
-            offset: Offset(6, 6),
-            blurRadius: 16,
-          ),
-        ],
-      ),
+      decoration: JwStyles.extraInfoBoxDecoration(isDark),
       padding: EdgeInsets.all(8),
       width: 110,
       height: 100,

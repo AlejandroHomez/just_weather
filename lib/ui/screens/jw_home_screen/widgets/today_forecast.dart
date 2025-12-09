@@ -27,7 +27,7 @@ class TodayForecast extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext contex, int index) {
                 final JwCurrentWeather currentWeatherForHour =
-                    _weatherDate!.forecastDayList[index];
+                    _weatherDate.forecastDayList[index];
 
                 return WeatherDayCard(
                   day: formatToHour(currentWeatherForHour.dateTime!),

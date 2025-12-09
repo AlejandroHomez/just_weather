@@ -49,20 +49,13 @@ class _JwSearchContentState extends ConsumerState<JwSearchContent>
       _history!.isNotEmpty ? dataForList = _history : dataForList = [];
     }
 
-    var boxDecoration = BoxDecoration(
-      color: isDark
-          ? JwColors.JW_SEQUENTIAL_BLACK_700
-          : JwColors.JW_PRIMARY_WHITE,
-      borderRadius: BorderRadius.circular(10),
-    );
-
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             Container(
-              decoration: boxDecoration,
+              decoration: JwStyles.searchContentDecoration(isDark),
               child: JwWeatherSearchBar(onSearch: _searchCity),
             ),
 
@@ -70,7 +63,7 @@ class _JwSearchContentState extends ConsumerState<JwSearchContent>
 
             Container(
               constraints: BoxConstraints(maxHeight: size.height * 0.45),
-              decoration: boxDecoration,
+              decoration: JwStyles.searchContentDecoration(isDark),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -166,7 +159,6 @@ class _ValidateErrors extends StatelessWidget {
   final bool isNotQuery;
 
   const _ValidateErrors({
-    super.key,
     required this.hasError,
     required this.isEmptyData,
     required this.isNotQuery,
@@ -210,7 +202,6 @@ class _ValidateErrors extends StatelessWidget {
 
 class _SearchItemsList extends StatelessWidget {
   const _SearchItemsList({
-    super.key,
     required this.dataForList,
     required this.widget,
     required this.presenter,
@@ -224,7 +215,6 @@ class _SearchItemsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool validateHistory = history != null && history!.isNotEmpty;
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
       child: ListView.separated(
