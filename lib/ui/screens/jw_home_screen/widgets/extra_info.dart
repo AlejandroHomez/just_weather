@@ -16,12 +16,16 @@ class ExtraInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final size = MediaQuery.of(context).size;
+    final isTablet = size.width > JwConstants.TABLET_SIZE;
+    final smallScreen = size.width < JwConstants.SMALL_SCREEN;
 
     return Container(
       decoration: JwStyles.extraInfoBoxDecoration(isDark),
       padding: EdgeInsets.all(8),
-      width: 110,
-      height: 100,
+      margin: EdgeInsets.all(isTablet ? 10 : 2),
+      width: smallScreen ? 95 : 110,
+      height: smallScreen ? 105 : 100,
       child: Column(
         children: [
           Icon(icon, size: 26),
@@ -29,7 +33,10 @@ class ExtraInfo extends StatelessWidget {
           Text(label, style: TextStyle(fontSize: 14)),
           Text(
             value,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: smallScreen ? 14 : 16,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ],
       ),

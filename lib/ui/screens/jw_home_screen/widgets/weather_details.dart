@@ -12,6 +12,9 @@ class WeatherDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final smallScreen = size.width < JwConstants.SMALL_SCREEN;
+
     return Column(
       children: [
         Text(
@@ -21,7 +24,10 @@ class WeatherDetails extends StatelessWidget {
         const SizedBox(height: 15),
         ZoomIn(
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            padding: EdgeInsets.symmetric(
+              vertical: 20,
+              horizontal: smallScreen ? 5 : 20,
+            ),
             child: Column(
               spacing: 10,
               children: [

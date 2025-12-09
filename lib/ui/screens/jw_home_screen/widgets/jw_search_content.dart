@@ -37,7 +37,6 @@ class _JwSearchContentState extends ConsumerState<JwSearchContent>
   @override
   Widget build(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    final size = MediaQuery.of(context).size;
 
     List<JwSearchResponse>? dataForList;
 
@@ -62,7 +61,7 @@ class _JwSearchContentState extends ConsumerState<JwSearchContent>
             const SizedBox(height: 5),
 
             Container(
-              constraints: BoxConstraints(maxHeight: size.height * 0.45),
+              constraints: BoxConstraints(maxHeight: validateMaxHeight()),
               decoration: JwStyles.searchContentDecoration(isDark),
               child: SingleChildScrollView(
                 child: Column(
@@ -88,6 +87,22 @@ class _JwSearchContentState extends ConsumerState<JwSearchContent>
         ),
       ),
     );
+  }
+
+  double validateMaxHeight() {
+    final size = MediaQuery.of(context).size;
+    final isTablet = size.width > JwConstants.TABLET_SIZE;
+    final smallScreen = size.width < JwConstants.SMALL_SCREEN;
+    double response = size.height * 0.45;
+    if (isTablet) {
+      response = size.height * 0.35;
+    }
+
+    if (smallScreen) {
+      response = size.height * 0.38;
+    }
+
+    return response;
   }
 
   Future<void> _searchCity(String query) async {

@@ -15,7 +15,7 @@ class TodayForecast extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "Próximas",
+          "Pronóstico del día",
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: 15),

@@ -39,17 +39,14 @@ class _JwHomeScreenState extends ConsumerState<JwHomeScreen>
     _config = ref.read(servicesConfigProvider);
     _presenter = JwHomeScreenPresenter(this, _config);
 
-    Future.microtask(() async {
-      final location = await ref.read(jwLocationControllerProvider.future);
-      final selectedCity = "${location.lat},${location.lon}";
-      _presenter.getCurrentWeather(selectedCity);
-    });
+    Future.microtask(() => loadCity.call());
   }
 
   @override
   Widget build(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final size = MediaQuery.of(context).size;
+    final isTablet = size.width > JwConstants.TABLET_SIZE;
     final defaultHorizontalPadding = const EdgeInsets.symmetric(horizontal: 20);
 
     return Scaffold(
@@ -60,7 +57,20 @@ class _JwHomeScreenState extends ConsumerState<JwHomeScreen>
         ),
 
         child: _showAlert
-            ? Center(child: Text('Algo salio mal, intenta mas tarde'))
+            ? Center(
+                child: Column(
+                  children: [
+                    Text('Algo salio mal, intenta mas tarde'),
+                    IconButton(
+                      onPressed: () => loadCity.call(),
+                      icon: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text('Intentar nuevamente'),
+                      ),
+                    ),
+                  ],
+                ),
+              )
             : Stack(
                 children: [
                   _weatherDate != null && isLoading == false
@@ -120,12 +130,13 @@ class _JwHomeScreenState extends ConsumerState<JwHomeScreen>
 
                                 Padding(
                                   padding: defaultHorizontalPadding,
+
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        _weatherDate!.location.city ?? '',
+                                        _weatherDate!.location.city ??
+                                            _weatherDate?.location.country ??
+                                            '',
                                         style: TextStyle(
                                           fontSize: 34,
                                           fontWeight: FontWeight.bold,
@@ -139,18 +150,43 @@ class _JwHomeScreenState extends ConsumerState<JwHomeScreen>
                                         ),
                                         style: TextStyle(fontSize: 16),
                                       ),
-                                      CurrentTempWidget(
-                                        isDark: isDark,
-                                        weatherDate: _weatherDate,
+                                    ],
+                                  ),
+                                ),
+
+                                Padding(
+                                  padding: defaultHorizontalPadding,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          CurrentTempWidget(
+                                            isDark: isDark,
+                                            weatherDate: _weatherDate,
+                                          ),
+                                          const SizedBox(height: 30),
+                                          ConditionText(
+                                            weatherDate: _weatherDate,
+                                            isDark: isDark,
+                                          ),
+                                          const SizedBox(height: 30),
+                                          AstroWidgets(
+                                            weatherDate: _weatherDate,
+                                          ),
+                                          const SizedBox(height: 30),
+                                        ],
                                       ),
-                                      const SizedBox(height: 30),
-                                      ConditionText(
-                                        weatherDate: _weatherDate,
-                                        isDark: isDark,
-                                      ),
-                                      const SizedBox(height: 30),
-                                      AstroWidgets(weatherDate: _weatherDate),
-                                      const SizedBox(height: 30),
+
+                                      if (isTablet)
+                                        WeatherDetails(
+                                          weatherDate: _weatherDate,
+                                        ),
                                     ],
                                   ),
                                 ),
@@ -165,14 +201,16 @@ class _JwHomeScreenState extends ConsumerState<JwHomeScreen>
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        WeatherDetails(
-                                          weatherDate: _weatherDate,
-                                        ),
+                                        isTablet
+                                            ? SizedBox.shrink()
+                                            : WeatherDetails(
+                                                weatherDate: _weatherDate,
+                                              ),
                                         const SizedBox(height: 25),
                                         TodayForecast(
                                           weatherDate: _weatherDate,
                                         ),
-                                        const SizedBox(height: 25),
+                                        SizedBox(height: 100),
                                       ],
                                     ),
                                   ),
@@ -225,6 +263,19 @@ class _JwHomeScreenState extends ConsumerState<JwHomeScreen>
             )
           : SizedBox.shrink(),
     );
+  }
+
+  Future<void> loadCity() async {
+    final location = await ref.read(jwLocationControllerProvider.future);
+    String selectedCity = '';
+
+    if (location.lat != null && location.lon != null) {
+      selectedCity = "${location.lat},${location.lon}";
+    } else if (location.city != null) {
+      selectedCity = location.city!;
+    }
+
+    _presenter.getCurrentWeather(selectedCity);
   }
 
   void updateTheme() {

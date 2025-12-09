@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:just_weather_app/config/theme/jw_colors.dart';
+import 'package:just_weather_app/just_weather.dart';
 
 class JwHomeSkeleton extends StatefulWidget {
   const JwHomeSkeleton({super.key});
@@ -37,6 +37,8 @@ class _JwHomeSkeletonState extends State<JwHomeSkeleton>
   @override
   Widget build(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final size = MediaQuery.of(context).size;
+    final isTablet = size.width > JwConstants.TABLET_SIZE;
 
     return Scaffold(
       backgroundColor: isDark
@@ -64,25 +66,91 @@ class _JwHomeSkeletonState extends State<JwHomeSkeleton>
                 const SizedBox(height: 30),
 
                 Center(
-                  child: Column(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      _SkeletomBox(
-                        opacityAnimation: _opacityAnimation,
-                        height: 120,
-                        width: 120,
+                      Column(
+                        children: [
+                          _SkeletomBox(
+                            opacityAnimation: _opacityAnimation,
+                            height: 120,
+                            width: 120,
+                          ),
+                          const SizedBox(height: 20),
+                          _SkeletomBox(
+                            opacityAnimation: _opacityAnimation,
+                            height: 80,
+                            width: 160,
+                          ),
+                          const SizedBox(height: 10),
+                          _SkeletomBox(
+                            opacityAnimation: _opacityAnimation,
+                            height: 20,
+                            width: 90,
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 20),
-                      _SkeletomBox(
-                        opacityAnimation: _opacityAnimation,
-                        height: 80,
-                        width: 160,
-                      ),
-                      const SizedBox(height: 10),
-                      _SkeletomBox(
-                        opacityAnimation: _opacityAnimation,
-                        height: 20,
-                        width: 90,
-                      ),
+                      if (isTablet) const SizedBox(width: 50),
+
+                      if (isTablet)
+                        Container(
+                          width: size.width * 0.4,
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: isDark
+                                ? JwColors.JW_SEQUENTIAL_BLACK_700
+                                : JwColors.JW_PRIMARY_WHITE,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Column(
+                            spacing: 20,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  _SkeletomBox(
+                                    opacityAnimation: _opacityAnimation,
+                                    height: 50,
+                                    width: 70,
+                                  ),
+                                  _SkeletomBox(
+                                    opacityAnimation: _opacityAnimation,
+                                    height: 50,
+                                    width: 70,
+                                  ),
+                                  _SkeletomBox(
+                                    opacityAnimation: _opacityAnimation,
+                                    height: 50,
+                                    width: 70,
+                                  ),
+                                ],
+                              ),
+
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  _SkeletomBox(
+                                    opacityAnimation: _opacityAnimation,
+                                    height: 50,
+                                    width: 70,
+                                  ),
+                                  _SkeletomBox(
+                                    opacityAnimation: _opacityAnimation,
+                                    height: 50,
+                                    width: 70,
+                                  ),
+                                  _SkeletomBox(
+                                    opacityAnimation: _opacityAnimation,
+                                    height: 50,
+                                    width: 70,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
                     ],
                   ),
                 ),
@@ -97,62 +165,64 @@ class _JwHomeSkeletonState extends State<JwHomeSkeleton>
 
                 const SizedBox(height: 15),
 
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: isDark
-                        ? JwColors.JW_SEQUENTIAL_BLACK_700
-                        : JwColors.JW_PRIMARY_WHITE,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Column(
-                    spacing: 20,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _SkeletomBox(
-                            opacityAnimation: _opacityAnimation,
-                            height: 50,
-                            width: 70,
-                          ),
-                          _SkeletomBox(
-                            opacityAnimation: _opacityAnimation,
-                            height: 50,
-                            width: 70,
-                          ),
-                          _SkeletomBox(
-                            opacityAnimation: _opacityAnimation,
-                            height: 50,
-                            width: 70,
-                          ),
-                        ],
-                      ),
+                isTablet
+                    ? SizedBox.shrink()
+                    : Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: isDark
+                              ? JwColors.JW_SEQUENTIAL_BLACK_700
+                              : JwColors.JW_PRIMARY_WHITE,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Column(
+                          spacing: 20,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                _SkeletomBox(
+                                  opacityAnimation: _opacityAnimation,
+                                  height: 50,
+                                  width: 70,
+                                ),
+                                _SkeletomBox(
+                                  opacityAnimation: _opacityAnimation,
+                                  height: 50,
+                                  width: 70,
+                                ),
+                                _SkeletomBox(
+                                  opacityAnimation: _opacityAnimation,
+                                  height: 50,
+                                  width: 70,
+                                ),
+                              ],
+                            ),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _SkeletomBox(
-                            opacityAnimation: _opacityAnimation,
-                            height: 50,
-                            width: 70,
-                          ),
-                          _SkeletomBox(
-                            opacityAnimation: _opacityAnimation,
-                            height: 50,
-                            width: 70,
-                          ),
-                          _SkeletomBox(
-                            opacityAnimation: _opacityAnimation,
-                            height: 50,
-                            width: 70,
-                          ),
-                        ],
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                _SkeletomBox(
+                                  opacityAnimation: _opacityAnimation,
+                                  height: 50,
+                                  width: 70,
+                                ),
+                                _SkeletomBox(
+                                  opacityAnimation: _opacityAnimation,
+                                  height: 50,
+                                  width: 70,
+                                ),
+                                _SkeletomBox(
+                                  opacityAnimation: _opacityAnimation,
+                                  height: 50,
+                                  width: 70,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
-                ),
 
                 const SizedBox(height: 25),
 
