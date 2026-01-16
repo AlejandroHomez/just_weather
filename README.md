@@ -185,7 +185,7 @@ cd just-weather
 flutter pub get
 
 3. Crea el archivo .env
-WEATHER_API_KEY=cc7aa657889f485fbcf05445250712
+WEATHER_API_KEY={WEATHER_APY_KEY_VALUE}
 
 4. Corre la app
 flutter run
