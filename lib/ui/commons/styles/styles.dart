@@ -50,7 +50,7 @@ class JwStyles {
     ],
   );
 
-  static Decoration contentWeatherStatusDecoration(isDark) => BoxDecoration(
+  static Decoration contentWeatherStatusDecoration(bool isDark) => BoxDecoration(
     shape: BoxShape.circle,
     border: Border.all(
       color: isDark
@@ -60,9 +60,12 @@ class JwStyles {
     color: isDark ? JwColors.JW_PRIMARY_BLACK : JwColors.JW_PRIMARY_WHITE,
   );
 
-  static Decoration extraInfoBoxDecoration(bool isDark) => BoxDecoration(
+  static Decoration extraInfoBoxDecoration(bool isDark,  {Color? borderColor}) => BoxDecoration(
     borderRadius: BorderRadius.circular(10),
     color: isDark ? JwColors.JW_PRIMARY_BLACK : JwColors.JW_PRIMARY_WHITE,
+    border: Border.all(
+      color: borderColor ?? Colors.transparent,
+    ),
     boxShadow: [
       BoxShadow(
         color: isDark ? JwColors.JW_SCALE_PRIMARY : JwColors.JW_PRIMARY_GREY,

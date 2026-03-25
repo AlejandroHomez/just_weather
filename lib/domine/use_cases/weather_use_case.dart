@@ -13,4 +13,8 @@ class JwWeatherUseCase {
   Future<({JwErrorItem? errorItem, JwSearchDataListModel? searchDataListModel})>
   getSearchData({required String query}) =>
       _weatherGateway.getSearchData(query: query);
+
+  Future<({JwErrorItem? errorItem, double? elevation})> getElevation({
+    required JwLocation location,
+  }) => _weatherGateway.getElevation(location: location);
 }

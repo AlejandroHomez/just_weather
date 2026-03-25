@@ -5,7 +5,7 @@ class ExtraInfo extends StatelessWidget {
   final IconData icon;
   final String label;
   final String value;
-
+  
   const ExtraInfo({
     super.key,
     required this.icon,

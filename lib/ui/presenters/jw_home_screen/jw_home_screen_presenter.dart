@@ -18,4 +18,15 @@ class JwHomeScreenPresenter {
       _interface.getCurrentWeather(response.forecastDay!);
     }
   }
+
+  Future<void> getElevation(JwLocation location) async {
+    _interface.showSkeleton();
+    final response = await config.weatherUseCase.getElevation(
+      location: location,
+    );
+
+    if (response.elevation != null) {
+      _interface.getElevation(response.elevation!);
+    }
+  }
 }

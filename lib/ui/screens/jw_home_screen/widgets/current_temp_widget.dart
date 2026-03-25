@@ -43,6 +43,42 @@ class CurrentTempWidget extends StatelessWidget {
               ),
             ),
           ),
+
+          Positioned(
+            top: 30,
+            left: 60,
+            child: Container(
+              alignment: Alignment.center,
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.arrow_drop_up_outlined, size: 20),
+                  Text(
+                    "${_weatherDate.forecastDay!.maxTempC}°",
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          Positioned(
+            top: 30,
+            right: 60,
+            child: Container(
+              alignment: Alignment.center,
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.arrow_drop_down_outlined, size: 20),
+                  Text(
+                    "${_weatherDate.forecastDay!.minTempC}°",
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

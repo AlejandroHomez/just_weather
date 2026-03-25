@@ -12,4 +12,8 @@ class EndpointsApi {
   static String getUrlSearch() {
     return Endpoints.urlSearch;
   }
+
+  static String getUrlAltitude() {
+    return Endpoints.urlAltitude;
+  }
 }

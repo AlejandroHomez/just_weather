@@ -19,7 +19,7 @@ class _JwSplashScreenState extends ConsumerState<JwSplashScreen> {
   }
 
   Future<void> _initFlow() async {
-    await Future.delayed(const Duration(milliseconds: 800));
+    await Future.delayed(const Duration(milliseconds: 300));
 
     await ref.read(jwLocationControllerProvider.future);
 
@@ -42,7 +42,7 @@ class _JwSplashScreenState extends ConsumerState<JwSplashScreen> {
             Image.asset("assets/logo.png", height: 200),
             const SizedBox(height: 20),
             const Text(
-              "Just Weather",
+              "Homez Weather",
               style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),

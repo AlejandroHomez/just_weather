@@ -75,4 +75,37 @@ class WeatherApi implements JwWeatherGateway {
 
     return {"data": jsonDecode(response.body)};
   }
+
+  @override
+  Future<({JwErrorItem? errorItem, double? elevation})> getElevation({
+    required JwLocation location,
+  }) async {
+    try {
+      final Map<String, dynamic> currentResponse = await _getAltitudeResponse(
+        location,
+      );
+
+      final response = JwLocationMapper().fromMap(
+        currentResponse['results'][0],
+      );
+
+      return (errorItem: null, elevation: response.elevation);
+    } catch (e) {
+      return (errorItem: JwErrorItem(), elevation: null);
+    }
+  }
+
+  Future<Map<String, dynamic>> _getAltitudeResponse(JwLocation location) async {
+    final uri = Uri.parse(
+      '${EndpointsApi.getUrlAltitude()}?locations=${location.lat},${location.lon}',
+    );
+
+    final response = await http.get(uri);
+
+    if (response.statusCode != 200) {
+      throw Exception('Open Elevation API error: ${response.body}');
+    }
+
+    return jsonDecode(response.body);
+  }
 }

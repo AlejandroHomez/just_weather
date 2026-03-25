@@ -29,10 +29,12 @@ class JwLocationController extends _$JwLocationController {
     }
 
     try {
-      final pos = await Geolocator.getCurrentPosition();
+      final Position position = await Geolocator.getCurrentPosition();
+
       return JwLocation(
-        lat: pos.latitude,
-        lon: pos.longitude,
+        lat: position.latitude,
+        lon: position.longitude,
+        elevation: position.altitude != 0.0 ? position.altitude : null,
         city: null,
         isFallback: false,
       );

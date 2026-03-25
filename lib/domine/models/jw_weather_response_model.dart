@@ -5,11 +5,13 @@ class JwWeatherResponse {
   final JwCurrentWeather current;
   final JwWeatherAstroModel astro;
   final List<JwCurrentWeather> forecastDayList;
+  final JwForecastDay? forecastDay;
 
   JwWeatherResponse({
     required this.location,
     required this.current,
     required this.astro,
     required this.forecastDayList,
+    required this.forecastDay,
   });
 }

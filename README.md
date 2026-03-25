@@ -1,11 +1,11 @@
 
-📘 Just Weather – Flutter Technical Test
+📘 Homez Weather – Flutter Technical Test
 
 Aplicación móvil desarrollada en Flutter que muestra información meteorológica detallada, incluyendo clima actual, pronóstico horario, detalles adicionales, modo claro/oscuro, búsquedas recientes y manejo de ubicación.
 
 🌤️ 1. Descripción General
 
-Just Weather es una aplicación que permite consultar el clima actual y el pronóstico de cualquier ciudad del mundo.
+Homez Weather es una aplicación que permite consultar el clima actual y el pronóstico de cualquier ciudad del mundo.
 Utiliza WeatherAPI para obtener datos meteorológicos y una arquitectura basada en Riverpod con componentes UI personalizados y una experiencia de usuario optimizada con skeleton loaders, animaciones y manejo de errores.
 
 Esta app fue desarrollada como parte de una prueba técnica para el rol de Desarrollador Flutter Mobile.

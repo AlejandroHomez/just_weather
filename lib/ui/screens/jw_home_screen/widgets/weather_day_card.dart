@@ -5,12 +5,14 @@ class WeatherDayCard extends StatelessWidget {
   final String day;
   final String temp;
   final String icon;
+  final Color borderColor;
 
   const WeatherDayCard({
     super.key,
     required this.day,
     required this.temp,
     required this.icon,
+    this.borderColor = Colors.transparent,
   });
 
   @override
@@ -20,7 +22,7 @@ class WeatherDayCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-      decoration: JwStyles.extraInfoBoxDecoration(isDark),
+      decoration: JwStyles.extraInfoBoxDecoration(isDark, borderColor: borderColor),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

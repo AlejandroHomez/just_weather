@@ -16,7 +16,7 @@ class App extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       key: globalKey,
-      title: 'Just Weather',
+      title: 'Homez Weather',
       themeMode: themeMode,
       darkTheme: JwThemeData.darkTheme,
       theme: JwThemeData.lightTheme,
